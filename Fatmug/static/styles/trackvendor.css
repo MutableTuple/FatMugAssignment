@@ -95,3 +95,8 @@ input[type="text"]:focus {
   background-color: var(--color--cancelled);
   color: var(--color--cancelled--text);
 }
+.search__po--box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

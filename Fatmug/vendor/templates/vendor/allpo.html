@@ -6,16 +6,21 @@
 <section class="track__vendor">
   <div class="track__vendor--search--box">
     <h1 id="sv">Search Purchase Orders (PO)</h1>
-    <input
-      type="text"
-      id="search--box"
-      placeholder="search po by vendor name, po number"
-    />
+    <form action="" method="GET" class="search__po--box">
+      <input
+        type="text"
+        id="search--box"
+        placeholder="search po by vendor name, po number"
+        name="search_query"
+        value="{{search_query}}"
+      />
+    </form>
+
     <h1 id="results">25 results found</h1>
   </div>
 </section>
 <section class="ongoing__orders">
-  {% for PO in PO %}
+  {% for PO in searchedPO %}
   <div class="ongoing__orders--card">
     <div class="ongoing__orders--card--items card">
       <span id="order">{{PO.status}}</span>

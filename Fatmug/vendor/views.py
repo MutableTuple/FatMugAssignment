@@ -2,6 +2,8 @@ import math
 from django.shortcuts import render
 from .models import vendorModel,PurchaseOrder,PerformanceRecord
 from .forms import VendorAddForm
+from django.db.models import Q
+
 # Create your views here.
 def Home(request):
     page="home"
@@ -18,7 +20,12 @@ def trackVendor(request,pk):
 def allPo(request):
     page="allPO"
     PO = PurchaseOrder.objects.all()
-    context={"page":page,"PO":PO}
+    search_query =''
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
+    
+    searchedPO = PurchaseOrder.objects.distinct().filter(Q(po_number__icontains = search_query) | Q(vendor__name__icontains = search_query))    
+    context={"page":page,"PO":PO,"searchedPO":searchedPO,"search_query":search_query}
     return render(request,"vendor/home.html", context)
 
 def allVendor(request,pk):
