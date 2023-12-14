@@ -19,7 +19,7 @@ def getRoutes(request):
         {"GET":"/api/singlepo/id"}, #
         {"PUT":"/api/edit-po/id"}, #
         {"DELETE":"/api/delete-po/id"},
-        {"GET":"/api/vendor/id/performance"},
+        {"GET":"/api/performance-metrics/id"},
     ]
     return Response(routes)
 
