@@ -56,7 +56,7 @@ class PurchaseOrder(models.Model):
     delivered_before_delivery_date = models.IntegerField(default=0, null=True, blank=True)
     items = models.JSONField(default=CLASSIFICATION_CHOICES)
     quantity = models.IntegerField()
-    status = models.CharField(max_length=20, choices=[
+    status = models.CharField(max_length=20,null=True, blank=True,choices=[
         ('pending', 'Pending'),
         ('completed', 'Completed'),
         ('canceled', 'Canceled'),
