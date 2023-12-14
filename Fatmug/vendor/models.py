@@ -15,9 +15,10 @@ class vendorModel(models.Model):
     contact_details = models.TextField(null=True, blank=True)
     address = models.TextField(null=True, blank=True)
     vendor_code = models.CharField(max_length=15, blank=True, null=True, default=generate_unique_code())
-    on_time_delivery_rate = models.FloatField()
-    quality_rating_avg= models.FloatField()
-    average_response_time = models.FloatField()
+    
+    on_time_delivery_rate = models.FloatField(null=True, blank=True, default=0)
+    quality_rating_avg= models.FloatField(null=True, blank=True,default=0)
+    average_response_time = models.FloatField(null=True, blank=True,default=0)
     # extra fields
     total_po_completed = models.IntegerField(default=0)
     total_po_cancelled = models.IntegerField(default=0)

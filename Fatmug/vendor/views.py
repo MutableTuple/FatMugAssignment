@@ -1,8 +1,9 @@
 import math
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import vendorModel,PurchaseOrder,PerformanceRecord
 from .forms import VendorAddForm
 from django.db.models import Q
+from .forms import VendorAddForm
 
 # Create your views here.
 def Home(request):
@@ -47,8 +48,13 @@ def allVendor(request,pk):
 
 def addVendor(request):
     page="addvendor"
+    form= VendorAddForm()
     vendor = vendorModel.objects.all()
-    form = VendorAddForm()
+    if request.method=="POST":
+        form = VendorAddForm(request.POST)
+        if form.is_valid():
+            form.save() #creates objecrt
+            return redirect("add-vendor")
     context={"page":page,"form":form,"vendor":vendor}
     return render(request,"vendor/home.html", context)
 

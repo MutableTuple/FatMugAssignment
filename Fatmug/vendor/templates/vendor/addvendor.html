@@ -3,8 +3,19 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'styles/addvendor.css' %}" />
-<form action="">
-  {% csrf_token %}
-  <h1>{{form.as_p}}</h1>
-</form>
+<section class="add__vendor">
+  <div class="add__vendor--container">
+    <form action="" method="POST" class="vendor__form" id="vendor__form">
+      {% csrf_token %}
+      <!-- prettier-ignore -->
+      {% for form in form %}
+      <label for="">{{form.label}}</label>
+      {{form}}
+      <!--  -->
+      {% endfor %}
+      <button type="submit" class="submit__btn">submit</button>
+    </form>
+  </div>
+</section>
+
 {% endblock content %}
