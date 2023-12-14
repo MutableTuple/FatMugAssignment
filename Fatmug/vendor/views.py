@@ -8,7 +8,13 @@ from django.db.models import Q
 def Home(request):
     page="home"
     vendor = vendorModel.objects.all()
-    context={"page":page,"vendor":vendor}
+    search_query = ''
+    
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
+    
+    searchedVendor = vendorModel.objects.distinct().filter(Q(vendor_code__icontains = search_query) | Q(name__icontains = search_query))    
+    context={"page":page,"vendor":vendor,"search_query":search_query,"searchedVendor":searchedVendor}
     return render(request,"vendor/home.html", context)
 
 def trackVendor(request,pk):
@@ -24,7 +30,7 @@ def allPo(request):
     if request.GET.get('search_query'):
         search_query = request.GET.get('search_query')
     
-    searchedPO = PurchaseOrder.objects.distinct().filter(Q(po_number__icontains = search_query) | Q(vendor__name__icontains = search_query))    
+    searchedPO = PurchaseOrder.objects.distinct().filter(Q(po_number__icontains = search_query) | Q(vendor__name__icontains = search_query)|Q(status__icontains=search_query))    
     context={"page":page,"PO":PO,"searchedPO":searchedPO,"search_query":search_query}
     return render(request,"vendor/home.html", context)
 
@@ -35,6 +41,7 @@ def allVendor(request,pk):
     cancelled_PO = PurchaseOrder.objects.filter(status = "canceled",vendor=vendor)
     all_PO = PurchaseOrder.objects.filter(vendor=vendor) 
     fulfillement_rate = (completed_PO.count()/all_PO.count())*100 if all_PO.count()>0 else 0
+    
     context={"vendor":vendor,"cpo":completed_PO,"ppo":pending_PO,"capo":cancelled_PO,"allpo":all_PO,"fulfillement_rate":fulfillement_rate}
     return render(request,"vendor/allvendor.html", context)
 

@@ -5,16 +5,21 @@
 <section class="all__vendor">
   <div class="all__vendor--search--box">
     <h1 id="sv">Search Vendors</h1>
-    <input
-      type="text"
-      id="search--box"
-      placeholder="search vendor by name, po number"
-    />
+    <form action="" method="GET" class="vendor__search--form">
+      <input
+        type="text"
+        id="search--box"
+        placeholder="search vendor by name, vendor code"
+        name="search_query"
+        value="{{search_query}}"
+      />
+    </form>
+
     <h1 id="results">{{vendor.count}} vendors registrations</h1>
   </div>
 </section>
 <div class="all__vendors">
-  {% for vendor in vendor %}
+  {% for vendor in searchedVendor %}
   <div class="vendor--card">
     <div class="vendor--card--items card">
       <span id="vendor">{{vendor.name}}</span>
