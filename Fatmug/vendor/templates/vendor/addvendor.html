@@ -1,0 +1,10 @@
+{% extends "main.html" %}
+<!-- prettier-ignore -->
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/addvendor.css' %}" />
+<form action="">
+  {% csrf_token %}
+  <h1>{{form.as_p}}</h1>
+</form>
+{% endblock content %}

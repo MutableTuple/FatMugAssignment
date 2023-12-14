@@ -1,0 +1,57 @@
+{% extends "main.html" %}
+<!-- prettier-ignore -->
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/trackvendor.css' %}" />
+<section class="track__vendor">
+  <div class="track__vendor--search--box">
+    <h1 id="sv">Search Purchase Orders (PO)</h1>
+    <input
+      type="text"
+      id="search--box"
+      placeholder="search po by vendor name, po number"
+    />
+    <h1 id="results">25 results found</h1>
+  </div>
+</section>
+<section class="ongoing__orders">
+  {% for PO in PO %}
+  <div class="ongoing__orders--card">
+    <div class="ongoing__orders--card--items card">
+      <span id="order">{{PO.status}}</span>
+      <p id="order-sub">Items</p>
+    </div>
+    <div class="ongoing__orders--card--items card">
+      <span id="order">{{PO.order_date|date:"SHORT_DATE_FORMAT"}}</span>
+      <p id="order-sub">Orderd on</p>
+    </div>
+    <div class="ongoing__orders--card--items card">
+      <span id="order">{{PO.delivery_date|date:"SHORT_DATE_FORMAT"}}</span>
+      <p id="order-sub">Delivery date</p>
+    </div>
+    <div class="ongoing__orders--card--items card">
+      <span id="order">{{PO.vendor.name}}</span>
+      <p id="order-sub">Vendor</p>
+    </div>
+    <div class="ongoing__orders--card--items card">
+      <span id="order">{{PO.status}}</span>
+      <p id="order-sub">Staus</p>
+    </div>
+    <div class="ongoing__orders--card--items card">
+      <span id="order">{{PO.po_number}}</span>
+      <p id="order-sub">PO number</p>
+    </div>
+    <div class="ongoing__orders--card--items card">
+      <span id="order"
+        >{{PO.acknowledgment_date|date:"SHORT_DATE_FORMAT"}}</span
+      >
+      <p id="order-sub">Acknowledgement date</p>
+    </div>
+    <div class="ongoing__orders--card--items card">
+      <span id="order">{{PO.quality_rating}}%</span>
+      <p id="order-sub">Quality rating</p>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock content %}
