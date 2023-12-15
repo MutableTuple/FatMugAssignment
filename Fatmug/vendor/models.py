@@ -4,13 +4,14 @@ from django.db import models
 
 # vendor code genrator
 
+
 def generate_unique_code():
       code = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(5))
       return code
-    
-
 # Create your models here.
 class vendorModel(models.Model):
+
+    
     name = models.CharField(max_length=250, null=True, blank=True)
     contact_details = models.TextField(null=True, blank=True)
     address = models.TextField(null=True, blank=True)
